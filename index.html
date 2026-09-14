@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NYC Airbnb | APS1 EDA</title>
-  <meta name="description" content="Relatório de análise exploratória e preparação de dados do Airbnb em Nova York para a APS1 de Machine Learning.">
+  <title>NYC Airbnb | EDA Pipeline</title>
+  <meta name="description" content="Análise exploratória e preparação de dados do Airbnb em Nova York para modelagem preditiva de preços.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,81 +12,103 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#inicio"><span>NYC</span> Airbnb EDA</a>
+    <a class="brand" href="#inicio"><span class="brand-mark">NY</span><span>Airbnb EDA</span></a>
     <nav aria-label="Seções do relatório">
-      <a href="#inspecao">Inspeção</a>
-      <a href="#univariada">Univariada</a>
+      <a href="#dados">Dados</a>
+      <a href="#distribuicoes">Distribuições</a>
       <a href="#relacoes">Relações</a>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#rubrica">Rubrica</a>
+      <a href="#preparacao">Preparação</a>
+      <a href="#conclusao">Conclusão</a>
     </nav>
+    <a class="download-link" href="Meu_projeto_EDA_ML_revisado%20(2).ipynb" download>Baixar notebook</a>
   </header>
 
   <main id="inicio">
     <section class="hero page-shell">
       <div class="hero-copy">
-        <p class="eyebrow">APS1 · Machine Learning · 14/09</p>
+        <p class="eyebrow">Exploratory data analysis · Machine learning</p>
         <h1>O que revela o preço de uma estadia em New York City?</h1>
         <p>
-          Análise exploratória do dataset New York City Airbnb Open Data, com
-          foco em qualidade dos dados, distribuições, relações com o preço e
-          preparação de um pipeline reproduzível para a etapa de regressão.
+          Uma investigação do mercado Airbnb de 2019 em Nova York, indo da
+          qualidade dos dados às decisões de pré-processamento necessárias para
+          construir um pipeline de regressão confiável.
         </p>
-        <div class="hero-actions">
-          <a class="button" href="Meu_projeto_EDA_ML_revisado%20(2).ipynb">Abrir notebook</a>
-          <a class="button button-secondary" href="Projeto_de_Machine_Learning%20(1).ipynb">Ver rubrica</a>
-        </div>
       </div>
-      <div class="hero-panel" aria-label="Resumo do dataset">
-        <div><strong>48.895</strong><span>anúncios</span></div>
-        <div><strong>16</strong><span>colunas</span></div>
-        <div><strong>11</strong><span>preços zero removidos</span></div>
-        <div><strong>2019</strong><span>ano dos dados</span></div>
+      <div class="hero-art" aria-label="Mapa estilizado dos boroughs de Nova York">
+        <div class="map-label label-manhattan">Manhattan</div>
+        <div class="map-label label-brooklyn">Brooklyn</div>
+        <div class="map-label label-queens">Queens</div>
+        <div class="map-line line-one"></div>
+        <div class="map-line line-two"></div>
+        <div class="map-line line-three"></div>
+        <div class="map-pin pin-one">01</div>
+        <div class="map-pin pin-two">02</div>
+        <div class="map-pin pin-three">03</div>
+        <span class="north">N ↑</span>
       </div>
     </section>
 
-    <section class="section page-shell" id="inspecao">
+    <section class="stats page-shell" aria-label="Resumo do dataset">
+      <div class="stat"><strong>48.895</strong><span>anúncios analisados</span></div>
+      <div class="stat"><strong>16</strong><span>colunas originais</span></div>
+      <div class="stat"><strong>11</strong><span>preços zero removidos</span></div>
+      <div class="stat"><strong>2019</strong><span>ano de referência</span></div>
+    </section>
+
+    <section class="section page-shell" id="dados">
       <div class="section-heading">
-        <p class="eyebrow">01 / Carregamento e inspeção</p>
+        <p class="eyebrow">01 / Leitura da base</p>
         <h2>Antes de modelar, entender o que existe.</h2>
       </div>
       <div class="two-column">
         <div>
           <p>
-            O dataset contém anúncios de Airbnb em Nova York. O alvo futuro da
-            APS2 é <code>price</code>, isto é, o preço anunciado por noite em
-            dólares. As features foram descritas no notebook, incluindo
-            identificadores, variáveis geográficas, tipo de acomodação,
-            avaliações, disponibilidade e bairro.
+            O dataset descreve anúncios de Airbnb em Nova York, combinando
+            localização, tipo de acomodação, disponibilidade, histórico de
+            avaliações e informações do anfitrião. O alvo escolhido para a etapa
+            preditiva é <code>price</code>, o preço anunciado por noite em
+            dólares.
           </p>
           <p>
-            <code>id</code> e <code>host_id</code> são numéricos apenas no
-            armazenamento; conceitualmente são identificadores e não entram nas
-            estatísticas ou correlações como grandezas.
+            Nem toda coluna numérica deve ser tratada como medida. <code>id</code>
+            e <code>host_id</code> são identificadores: entram no arquivo como
+            números, mas não representam intensidade, quantidade ou ordem. Por
+            isso, foram excluídos das estatísticas descritivas, correlações e do
+            pipeline de modelagem.
           </p>
         </div>
         <div class="note">
           <h3>Qualidade dos dados</h3>
           <p>
-            Existem 10.052 ausências em <code>last_review</code> e
-            <code>reviews_per_month</code>, coerentes com anúncios sem reviews.
-            Também há 21 ausências em <code>host_name</code>, 16 em
-            <code>name</code> e 11 registros com <code>price = 0</code>.
+            As ausências relevantes aparecem em <code>last_review</code> e
+            <code>reviews_per_month</code>. Como esses nulos coincidem com
+            anúncios sem avaliações, eles carregam informação de negócio: não são
+            apenas falhas de coleta. Já os 11 registros com <code>price = 0</code>
+            foram tratados como inconsistência do alvo, porque uma diária
+            comercial gratuita distorceria a regressão.
           </p>
         </div>
       </div>
-      <div class="check-strip">
-        <span>Sem IDs duplicados</span>
-        <span>Coordenadas dentro da área esperada</span>
-        <span>Regressão: não há classe para balancear</span>
-        <span>Split treino/teste antes das transformações</span>
+      <div class="insight-row">
+        <article>
+          <span>Tipos</span>
+          <p>Geografia, acomodação e bairro são categóricas; latitude, longitude, reviews, disponibilidade e noites mínimas são numéricas.</p>
+        </article>
+        <article>
+          <span>Desbalanceamento</span>
+          <p>Não existe classe-alvo por ser regressão, mas Manhattan, Brooklyn, Entire home/apt e Private room dominam a amostra.</p>
+        </article>
+        <article>
+          <span>Separação</span>
+          <p>O treino e teste foram separados antes de imputação, escala ou encoding, preservando uma avaliação sem vazamento.</p>
+        </article>
       </div>
     </section>
 
-    <section class="section section-alt" id="univariada">
+    <section class="section section-alt" id="distribuicoes">
       <div class="page-shell">
         <div class="section-heading">
-          <p class="eyebrow">02 / Análise univariada</p>
+          <p class="eyebrow">02 / Distribuições</p>
           <h2>A média conta uma história. A mediana conta outra.</h2>
         </div>
         <div class="table-chart-grid">
@@ -102,21 +124,37 @@
                 <tr><td>availability_365</td><td>112,78</td><td>45,00</td><td>131,63</td></tr>
               </tbody>
             </table>
-            <p class="caption">Estatísticas calculadas após remover somente os preços iguais a zero.</p>
+            <p class="caption">Resumo após remover apenas os preços iguais a zero.</p>
           </div>
-          <figure>
-            <img src="reports/figures/numeric_distributions.png" alt="Distribuições numéricas de noites mínimas, avaliações e avaliações por mês">
-            <figcaption>Variáveis numéricas têm caudas longas; limites visuais não removem observações.</figcaption>
-          </figure>
+          <div>
+            <p>
+              A distância entre média e mediana mostra a assimetria da base. Em
+              <code>price</code>, poucos anúncios muito caros elevam a média para
+              US$ 152,76, enquanto o anúncio típico fica mais próximo da mediana
+              de US$ 106. A mesma lógica aparece em <code>minimum_nights</code> e
+              <code>number_of_reviews</code>, indicando caudas longas em regras
+              de estadia e popularidade dos anúncios.
+            </p>
+            <p>
+              Por isso, a análise privilegia medianas para comparar grupos e usa
+              limites de eixo apenas para leitura visual. Os extremos continuam
+              presentes nas estatísticas e informam a escolha posterior de
+              transformação logarítmica, em vez de exclusão automática.
+            </p>
+          </div>
         </div>
+        <figure class="wide-figure">
+          <img src="reports/figures/numeric_distributions.png" alt="Distribuições numéricas de noites mínimas, avaliações e avaliações por mês">
+          <figcaption>Histograma, boxplot e violino tornam visível a concentração no início da escala e a presença de caudas longas.</figcaption>
+        </figure>
         <div class="figure-grid">
           <figure>
             <img src="reports/figures/overview.png" alt="Histograma de preço e contagens por tipo de quarto e borough">
-            <figcaption>Visão geral do preço, tipos de acomodação e boroughs.</figcaption>
+            <figcaption>O preço se concentra nas faixas mais baixas, enquanto os tipos de quarto mostram forte concentração em Entire home/apt e Private room.</figcaption>
           </figure>
           <figure>
             <img src="reports/figures/categorical_distributions.png" alt="Frequências de tipo de quarto, borough e bairros">
-            <figcaption>Entire home/apt e Private room concentram quase toda a base.</figcaption>
+            <figcaption>As categorias minoritárias, como Staten Island e Shared room, exigem interpretação cuidadosa por terem menor volume de observações.</figcaption>
           </figure>
         </div>
       </div>
@@ -124,116 +162,149 @@
 
     <section class="section page-shell" id="relacoes">
       <div class="section-heading">
-        <p class="eyebrow">03 / Análise bivariada e multivariada</p>
+        <p class="eyebrow">03 / Relações entre variáveis</p>
         <h2>O preço se organiza em camadas.</h2>
+      </div>
+      <div class="two-column">
+        <div>
+          <p>
+            As correlações lineares com <code>price</code> são fracas: nenhuma
+            variável numérica isolada explica bem o preço. Isso é esperado em um
+            mercado de hospedagem, onde localização, privacidade, disponibilidade
+            e dinâmica de demanda se combinam de forma não linear.
+          </p>
+          <p>
+            A relação numérica mais evidente ocorre entre
+            <code>number_of_reviews</code> e <code>reviews_per_month</code>, pois
+            ambas medem atividade de avaliações. Já a associação entre
+            <code>calculated_host_listings_count</code> e
+            <code>availability_365</code> sugere um possível padrão de anfitriões
+            mais profissionais, com múltiplos anúncios e maior disponibilidade.
+          </p>
+        </div>
+        <div>
+          <p>
+            Quando o preço é analisado por categorias, os padrões ficam mais
+            claros. <code>Entire home/apt</code> apresenta mediana maior que
+            <code>Private room</code>, o que faz sentido pela maior privacidade e
+            espaço. Manhattan também lidera entre os boroughs, provavelmente
+            refletindo centralidade, demanda turística e características não
+            observadas no dataset.
+          </p>
+        </div>
       </div>
       <div class="figure-grid">
         <figure>
           <img src="reports/figures/correlations.png" alt="Matriz de correlação das variáveis numéricas">
-          <figcaption>As correlações lineares com preço são fracas; nenhuma variável numérica isolada explica bem o alvo.</figcaption>
+          <figcaption>A matriz reforça que preço não é explicado por uma única variável numérica; correlação aqui é descritiva, não causal.</figcaption>
         </figure>
         <figure>
           <img src="reports/figures/target_by_category.png" alt="Preços medianos por tipo de quarto, borough e bairro">
-          <figcaption>Manhattan e Entire home/apt apresentam medianas de preço mais altas.</figcaption>
+          <figcaption>Medianas por categoria ajudam a evitar conclusões dominadas por poucos anúncios extremamente caros.</figcaption>
         </figure>
       </div>
       <div class="two-column relation-copy">
         <div>
-          <h3>Categóricas × target</h3>
+          <h3>Numéricas × categóricas</h3>
           <p>
-            O notebook usa medianas para reduzir a influência de poucos anúncios
-            extremamente caros. Bairro, borough e tipo de acomodação mostram
-            diferenças relevantes de preço.
+            Os boxplots mostram sobreposição entre grupos, mas também diferenças
+            na dispersão. Isso indica que as categorias ajudam a organizar o
+            problema, embora não determinem sozinhas o preço. Para a modelagem,
+            essa leitura justifica manter variáveis categóricas relevantes no
+            pipeline e evitar interpretações causais simplistas.
           </p>
         </div>
         <figure>
           <img src="reports/figures/numeric_categorical.png" alt="Boxplots de disponibilidade, noites mínimas e avaliações por categorias">
-          <figcaption>Boxplots conjuntos mostram sobreposição e diferenças de dispersão entre grupos.</figcaption>
+          <figcaption>Disponibilidade, noites mínimas e reviews variam por grupo, mas com grande sobreposição interna.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section section-dark" id="pipeline">
+    <section class="section section-dark" id="preparacao">
       <div class="page-shell">
         <div class="section-heading">
-          <p class="eyebrow">04 / Pré-processamento</p>
-          <h2>Decisões justificadas pelos achados da EDA.</h2>
+          <p class="eyebrow">04 / Preparação para modelagem</p>
+          <h2>Decisões guiadas pelo comportamento dos dados.</h2>
         </div>
         <div class="decision-grid">
           <article>
             <span>Missing</span>
-            <h3>Imputação semântica</h3>
-            <p><code>reviews_per_month</code> recebe zero porque ausência indica anúncio sem reviews. Demais numéricas usam mediana e categóricas usam moda.</p>
+            <h3>Imputação com significado</h3>
+            <p><code>reviews_per_month</code> recebe zero porque a ausência representa anúncios sem avaliações. As demais numéricas usam mediana para reduzir sensibilidade a caudas longas; categóricas usam moda.</p>
           </article>
           <article>
             <span>Outliers</span>
-            <h3>Remover erro, preservar caudas</h3>
-            <p>Preços zero são removidos. Extremos plausíveis, como estadias longas, são mantidos e comprimidos com <code>log1p</code>.</p>
+            <h3>Transformar, não apagar</h3>
+            <p>Preços iguais a zero são removidos como erro do alvo. Valores altos plausíveis permanecem, pois podem representar imóveis incomuns, contratos longos ou anúncios premium.</p>
           </article>
           <article>
             <span>Encoding</span>
-            <h3>One-hot controlado</h3>
-            <p>Borough, bairro e tipo de quarto usam one-hot. <code>min_frequency=20</code> agrupa bairros raros e <code>handle_unknown='ignore'</code> protege o teste.</p>
+            <h3>Categorias sob controle</h3>
+            <p>Borough, bairro e tipo de quarto usam one-hot encoding. Bairros raros são agrupados com <code>min_frequency=20</code>, reduzindo esparsidade e instabilidade.</p>
           </article>
           <article>
             <span>Escala</span>
-            <h3>Padronização</h3>
-            <p><code>StandardScaler</code> equaliza escalas após imputação e transformação logarítmica, favorecendo modelos da APS2.</p>
+            <h3>Escalas comparáveis</h3>
+            <p><code>StandardScaler</code> é aplicado depois de imputação e <code>log1p</code>. Isso torna variáveis como longitude, disponibilidade e contagens comparáveis para modelos futuros.</p>
           </article>
         </div>
         <div class="pca-grid">
           <figure>
             <img src="reports/figures/pca.png" alt="Projeção PCA das variáveis numéricas colorida por log do preço">
-            <figcaption>PCA numérico exploratório: há sobreposição forte entre faixas de preço, sem separabilidade clara.</figcaption>
+            <figcaption>O PCA preserva cerca de metade da variância numérica em dois componentes e não separa claramente faixas de preço.</figcaption>
           </figure>
           <div class="pipeline-output">
-            <p class="eyebrow">Saída verificada</p>
+            <p class="eyebrow">Pipeline verificado</p>
             <strong>39.107 × 139</strong><span>treino processado</span>
             <strong>9.777 × 139</strong><span>teste processado</span>
             <strong>100%</strong><span>valores finitos</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section page-shell" id="rubrica">
-      <div class="section-heading">
-        <p class="eyebrow">05 / Aderência à rubrica</p>
-        <h2>Checklist da APS1.</h2>
-      </div>
-      <div class="rubric-grid">
-        <article><strong>Carregamento e inspeção</strong><span>Cumpre</span><p>Features explicadas, tipos identificados, ausências e inconsistências discutidas, split feito antes das transformações.</p></article>
-        <article><strong>Univariada</strong><span>Cumpre</span><p>Estatísticas descritivas, três visualizações numéricas e três categóricas, com comentários objetivos.</p></article>
-        <article><strong>Bivariada e multivariada</strong><span>Cumpre</span><p>Correlação, scatter plots, medianas por categoria e boxplots conjuntos conectam variáveis ao target.</p></article>
-        <article><strong>Pré-processamento</strong><span>Cumpre</span><p>Missing, outliers, encoding, escala, PCA e pipeline com <code>Pipeline</code> e <code>ColumnTransformer</code>.</p></article>
-        <article><strong>Relatório e apresentação</strong><span>Cumpre bem</span><p>Principais achados, limitações, referências e GitHub Pages estruturado para documentação aberta.</p></article>
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="page-shell conclusion">
-        <div>
-          <p class="eyebrow">Relatório final</p>
-          <h2>O que levamos para a APS2.</h2>
-        </div>
-        <p>
-          O preço é assimétrico e depende de combinações de localização, tipo de
-          acomodação e contexto do anúncio. O pipeline final realiza imputação,
-          <code>log1p</code>, padronização e one-hot encoding sem aprender
-          informações do teste, ficando pronto para receber modelos de regressão.
+        <p class="dark-note">
+          O PCA foi usado como ferramenta exploratória, não como etapa automática
+          do pré-processador final. Como dois componentes descartariam uma parte
+          relevante da informação numérica e não revelaram agrupamentos bem
+          separados, o pipeline final preserva as variáveis transformadas para
+          que a etapa preditiva possa comparar modelos com mais flexibilidade.
         </p>
       </div>
+    </section>
+
+    <section class="section section-alt" id="conclusao">
+      <div class="page-shell conclusion">
+        <div>
+          <p class="eyebrow">Síntese</p>
+          <h2>O que fica para a modelagem.</h2>
+        </div>
+        <div>
+          <p>
+            O preço dos anúncios é assimétrico e depende de combinações entre
+            geografia, tipo de acomodação e contexto do anúncio. As variáveis
+            numéricas isoladas têm baixa correlação linear com o alvo, mas ainda
+            carregam sinais úteis quando combinadas com categorias e
+            transformações adequadas.
+          </p>
+          <p>
+            O resultado é um pipeline reprodutível, com separação treino/teste
+            antes de qualquer ajuste, imputação coerente com o significado dos
+            dados, tratamento conservador de extremos e encoding preparado para
+            categorias novas. A próxima etapa natural é conectar esse
+            pré-processador a modelos de regressão e avaliar erro em dólares.
+          </p>
+        </div>
+      </div>
       <div class="page-shell references">
-        <span>Grupo: Maria Eduarda Oliveira Galdino · Tomaz Santos Almeida</span>
+        <span>Maria Eduarda Oliveira Galdino · Tomaz Santos Almeida</span>
         <a href="https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data">Fonte dos dados</a>
-        <a href="README.md">README</a>
+        <a href="README.md">Documentação técnica</a>
       </div>
     </section>
   </main>
 
   <footer class="footer page-shell">
     <span>NYC Airbnb EDA Pipeline</span>
-    <span>APS1 · Machine Learning</span>
+    <span>Portfolio de dados · Python · scikit-learn</span>
   </footer>
 </body>
 </html>
