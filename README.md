@@ -54,9 +54,7 @@ Abra [index.html](index.html) no navegador para visualizar a página de apresent
 
 ### Publicação no GitHub Pages
 
-O workflow em `.github/workflows/pages.yml` publica automaticamente a página a cada push na branch `main`.
-
-Na primeira publicação, no GitHub, abra **Settings > Pages**, selecione **GitHub Actions** em *Build and deployment* e aguarde o workflow terminar. A página ficará disponível em:
+O workflow em `.github/workflows/pages.yml` publica automaticamente a página a cada push na branch `main` e tenta habilitar o Pages automaticamente. Se a organização bloquear essa habilitação via workflow, abra **Settings > Pages**, selecione **GitHub Actions** em *Build and deployment* e execute o workflow novamente. A página ficará disponível em:
 
 <https://meog38.github.io/nyc-airbnb-eda-pipeline/>
 
