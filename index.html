@@ -9,6 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{--ink:#17201e;--paper:#f4f0e9;--surface:#fffdf8;--line:#d6d0c6;--muted:#68706d;--coral:#d95f43;--blue:#4d8392;--deep-blue:#315f8c;--mono:"DM Mono",monospace;--display:"Space Grotesk",Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:var(--display);overflow-x:hidden}a{color:inherit}code{color:var(--coral);font-family:var(--mono);font-size:.92em}img{max-width:100%}.page-shell{width:min(1180px,calc(100% - 64px));margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;min-height:76px;padding:0 max(32px,calc((100vw - 1180px)/2));border-bottom:1px solid var(--line);background:rgba(244,240,233,.94);backdrop-filter:blur(12px);font-family:var(--mono);font-size:12px;text-transform:uppercase}.brand{display:inline-flex;align-items:center;gap:10px;font-weight:500;text-decoration:none}.brand-mark{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--ink);color:var(--coral);font-size:10px}nav{display:flex;justify-content:center;gap:22px}nav a,.download-link{color:var(--muted);text-decoration:none}nav a:hover,.download-link:hover{color:var(--coral)}.download-link{justify-self:end;padding:10px 12px;border:1px solid var(--line);background:rgba(255,253,248,.55)}
+    .hero{min-height:590px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:70px;padding:72px 0 80px}.hero-copy,.hero-art,.two-column>*,.table-chart-grid>*,.pca-grid>*{min-width:0}.eyebrow{margin:0 0 20px;color:var(--coral);font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h1{max-width:760px;margin-bottom:26px;font-size:clamp(44px,6vw,78px);line-height:.98;font-weight:650}h2{max-width:760px;margin-bottom:28px;font-size:clamp(34px,4.5vw,58px);line-height:1.02;font-weight:600}h3{margin-bottom:12px;font-size:22px;font-weight:600}p{color:var(--muted);font-size:17px;line-height:1.65}.hero-copy>p:not(.eyebrow){max-width:620px;font-size:19px}
+    .hero-art{position:relative;width:100%;min-height:430px;overflow:hidden;background:var(--blue);clip-path:polygon(8% 0,100% 8%,92% 100%,0 91%)}.hero-art:before{content:"";position:absolute;inset:0;opacity:.34;background:repeating-linear-gradient(72deg,transparent 0 23px,rgba(255,255,255,.45) 24px 25px),repeating-linear-gradient(162deg,transparent 0 31px,rgba(21,55,57,.35) 32px 33px)}.map-line{position:absolute;border:1px solid rgba(255,255,255,.65);transform:rotate(-25deg)}.line-one{width:135%;height:42%;left:-12%;top:27%;border-radius:50%}.line-two{width:130%;height:25%;left:-13%;top:49%;border-radius:50%;transform:rotate(19deg)}.line-three{width:74%;height:130%;left:29%;top:-15%;border-radius:45%;transform:rotate(37deg)}.map-label,.north{position:absolute;color:rgba(255,255,255,.9);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.label-manhattan{top:24%;left:38%}.label-brooklyn{bottom:25%;left:56%}.label-queens{top:32%;right:9%}.north{top:12%;right:12%}.map-pin{position:absolute;display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--surface);border-radius:50%;color:var(--surface);background:var(--coral);box-shadow:8px 8px 0 rgba(23,32,30,.18);font:11px var(--mono)}.pin-one{top:39%;left:32%}.pin-two{bottom:20%;right:28%;background:var(--ink)}.pin-three{top:26%;right:17%;width:30px;height:30px;background:transparent;font-size:9px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.stat{min-height:112px;padding:25px 20px 27px 0;border-right:1px solid var(--line)}.stat:not(:first-child){padding-left:28px}.stat:last-child{border-right:0}.stat strong{display:block;margin-bottom:7px;color:var(--coral);font-size:clamp(32px,4vw,42px);line-height:1}.stat span{color:var(--muted);font:10px/1.45 var(--mono);letter-spacing:.03em;text-transform:uppercase}
+    .section{padding:108px 0 82px}.section-alt{background:var(--surface);border-block:1px solid var(--line)}.section-dark{background:var(--ink);color:var(--surface)}.section-dark p,.section-dark figcaption{color:#b8c2bd}.section-dark h2,.section-dark h3{color:var(--surface)}.section-heading{margin-bottom:48px}.two-column{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.88fr);gap:60px;align-items:start}.note{padding:26px;border-left:4px solid var(--coral);background:#ebe4d8}.note p{margin-bottom:0;font-size:15px}
+    .insight-row,.feature-grid,.decision-grid{display:grid;gap:1px;border:1px solid var(--line);background:var(--line)}.insight-row{grid-template-columns:repeat(3,1fr);margin-top:48px}.feature-grid{grid-template-columns:repeat(4,1fr);margin-top:34px}.decision-grid{grid-template-columns:repeat(4,1fr);gap:14px;border:0;background:transparent}.insight-row article,.feature-grid article{min-height:150px;padding:22px;background:var(--surface)}.decision-grid article{min-height:300px;padding:22px;border:1px solid rgba(255,255,255,.22)}.insight-row span,.feature-grid span,.decision-grid article>span{color:var(--coral);font:11px var(--mono);text-transform:uppercase}.insight-row p,.feature-grid p{margin:18px 0 0;font-size:14px}.decision-grid p{margin-bottom:0;font-size:13px}.decision-grid h3{margin-top:34px}
+    .feature-table-wrap{margin-top:42px;overflow-x:auto;border:1px solid var(--line);background:var(--surface)}table{width:100%;border-collapse:collapse;font:12px var(--mono)}th,td{padding:15px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--coral);font-weight:500;text-transform:uppercase}tr:last-child td{border-bottom:0}.table-chart-grid{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:44px;align-items:start}.table-card{border:1px solid var(--line);background:var(--paper)}.table-card td:not(:first-child),.table-card th:not(:first-child){text-align:right}.caption{margin:0;padding:14px 12px 16px;border-top:1px solid var(--line);font:11px/1.5 var(--mono)}
+    figure{margin:0}figure img{display:block;width:100%;border:1px solid var(--line);background:white}figcaption{margin-top:10px;color:var(--muted);font:11px/1.5 var(--mono)}.wide-figure{margin-top:42px}.figure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:34px}.relation-copy{margin-top:48px;align-items:center}
+    .pca-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:52px;align-items:center;margin-top:56px}.pipeline-output{display:grid;gap:8px}.pipeline-output strong{color:var(--coral);font-size:clamp(34px,4.5vw,50px);line-height:1}.pipeline-output span{margin-bottom:14px;color:#b8c2bd;font:11px var(--mono);text-transform:uppercase}.dark-note{max-width:850px;margin:44px 0 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.18)}
+    .conclusion{display:grid;grid-template-columns:.85fr 1.15fr;gap:68px;align-items:start}.references{display:flex;flex-wrap:wrap;gap:24px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font:11px/1.6 var(--mono);text-transform:uppercase}.references a{color:var(--coral);text-decoration:none}.footer{display:flex;justify-content:space-between;gap:20px;padding:28px 0 34px;color:var(--muted);font:11px var(--mono);text-transform:uppercase}
+    @media (max-width:960px){.topbar{grid-template-columns:1fr auto}nav{display:none}.hero,.two-column,.table-chart-grid,.pca-grid,.conclusion{grid-template-columns:1fr}.hero{min-height:0}.hero-art{min-height:340px}.insight-row,.feature-grid,.decision-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width:680px){.page-shell{width:calc(100% - 36px);max-width:354px}.topbar{width:390px;max-width:100%;min-height:68px;padding-inline:18px;gap:10px;font-size:10px;display:flex;justify-content:space-between}.brand span:not(.brand-mark){display:none}.download-link{padding:8px 9px;white-space:nowrap;font-size:0}.download-link:after{content:"Notebook";font-size:10px}.hero{padding:58px 0;gap:40px}h1{font-size:31px;max-width:100%}h2{font-size:34px}.hero-copy>p:not(.eyebrow){font-size:17px}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-top:1px solid var(--line)}.stat:not(:first-child){padding-left:18px}.insight-row,.feature-grid,.decision-grid,.figure-grid{grid-template-columns:1fr}.section{padding:76px 0 60px}.footer{display:block;line-height:2}}
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -81,13 +96,42 @@
           <h3>Qualidade dos dados</h3>
           <p>
             As ausências relevantes aparecem em <code>last_review</code> e
-            <code>reviews_per_month</code>. Como esses nulos coincidem com
-            anúncios sem avaliações, eles carregam informação de negócio: não são
-            apenas falhas de coleta. Já os 11 registros com <code>price = 0</code>
+            <code>reviews_per_month</code>: são 10.052 nulos na base original e
+            10.051 após remover preços inválidos. Como esses nulos coincidem com
+            anúncios sem avaliações, eles carregam informação de negócio, não
+            apenas falha de coleta. Já os 11 registros com <code>price = 0</code>
             foram tratados como inconsistência do alvo, porque uma diária
-            comercial gratuita distorceria a regressão.
+            comercial gratuita distorceria o treinamento e as métricas de erro.
+            A coluna <code>last_review</code> possui 1.764 datas distintas, de
+            2011-03-28 a 2019-07-08, mas foi deixada fora do pipeline porque
+            exigiria engenharia temporal específica.
           </p>
         </div>
+      </div>
+      <div class="feature-table-wrap" aria-label="Dicionário de dados">
+        <table>
+          <thead>
+            <tr><th>Coluna</th><th>Tipo conceitual</th><th>Papel na análise</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>id</code></td><td>Identificador</td><td>Chave única do anúncio. Usada para auditoria de duplicidade, não como variável preditiva.</td></tr>
+            <tr><td><code>name</code></td><td>Texto livre</td><td>Título do anúncio. Pode conter sinal textual, mas foi descartado nesta versão para evitar NLP fora do escopo.</td></tr>
+            <tr><td><code>host_id</code></td><td>Identificador</td><td>Identifica o anfitrião. Não é escala numérica; o sinal de múltiplos anúncios é capturado por outra coluna.</td></tr>
+            <tr><td><code>host_name</code></td><td>Texto / identificação</td><td>Nome do anfitrião. Possui poucos ausentes e não deve ser usado diretamente por baixa generalização.</td></tr>
+            <tr><td><code>neighbourhood_group</code></td><td>Categórica nominal</td><td>Borough de Nova York. Mantida por ser uma dimensão forte de localização.</td></tr>
+            <tr><td><code>neighbourhood</code></td><td>Categórica nominal</td><td>Bairro específico. Mantida com agrupamento de categorias raras para reduzir esparsidade.</td></tr>
+            <tr><td><code>latitude</code></td><td>Numérica geográfica</td><td>Coordenada espacial. Mantida e padronizada; não recebeu transformação logarítmica.</td></tr>
+            <tr><td><code>longitude</code></td><td>Numérica geográfica</td><td>Coordenada espacial. Mantida e padronizada; ajuda a capturar localização fina.</td></tr>
+            <tr><td><code>room_type</code></td><td>Categórica nominal</td><td>Tipo de acomodação. Mantida porque há diferença clara de preço mediano entre grupos.</td></tr>
+            <tr><td><code>price</code></td><td>Numérica contínua</td><td>Alvo da regressão. Registros com preço zero foram removidos como inconsistência.</td></tr>
+            <tr><td><code>minimum_nights</code></td><td>Numérica discreta</td><td>Regra mínima de estadia. Tem cauda longa e recebe <code>log1p</code> no pipeline.</td></tr>
+            <tr><td><code>number_of_reviews</code></td><td>Numérica discreta</td><td>Total de avaliações. Representa histórico de atividade e recebe <code>log1p</code>.</td></tr>
+            <tr><td><code>last_review</code></td><td>Data armazenada como texto</td><td>Data da avaliação mais recente. Foi analisada, mas não entrou no pipeline final nesta versão.</td></tr>
+            <tr><td><code>reviews_per_month</code></td><td>Numérica contínua</td><td>Média mensal de reviews. Ausência indica anúncio sem avaliações; imputação escolhida: zero.</td></tr>
+            <tr><td><code>calculated_host_listings_count</code></td><td>Numérica discreta</td><td>Número de anúncios do anfitrião. Aproxima profissionalização do host e recebe <code>log1p</code>.</td></tr>
+            <tr><td><code>availability_365</code></td><td>Numérica discreta</td><td>Dias disponíveis no ano. Mantida como sinal de disponibilidade/oferta e padronizada.</td></tr>
+          </tbody>
+        </table>
       </div>
       <div class="insight-row">
         <article>
@@ -96,11 +140,11 @@
         </article>
         <article>
           <span>Desbalanceamento</span>
-          <p>Não existe classe-alvo por ser regressão, mas Manhattan, Brooklyn, Entire home/apt e Private room dominam a amostra.</p>
+          <p>Não existe classe-alvo por ser regressão, mas Manhattan e Brooklyn somam cerca de 85% da base válida.</p>
         </article>
         <article>
           <span>Separação</span>
-          <p>O treino e teste foram separados antes de imputação, escala ou encoding, preservando uma avaliação sem vazamento.</p>
+          <p>O split foi estratificado por decis de preço para preservar a cauda do alvo em treino e teste.</p>
         </article>
       </div>
     </section>
@@ -157,6 +201,24 @@
             <figcaption>As categorias minoritárias, como Staten Island e Shared room, exigem interpretação cuidadosa por terem menor volume de observações.</figcaption>
           </figure>
         </div>
+        <div class="feature-grid">
+          <article>
+            <span>Acomodação</span>
+            <p>Entire home/apt representa 51,97% dos anúncios válidos, Private room 45,65% e Shared room 2,37%.</p>
+          </article>
+          <article>
+            <span>Boroughs</span>
+            <p>Manhattan concentra 44,31% da base válida e Brooklyn 41,11%; Queens, Bronx e Staten Island ficam bem menores.</p>
+          </article>
+          <article>
+            <span>Preço típico</span>
+            <p>A mediana global é US$ 106, menor que a média de US$ 152,76, evidenciando a influência de anúncios caros.</p>
+          </article>
+          <article>
+            <span>Caudas</span>
+            <p><code>minimum_nights</code> chega a 1.250 e <code>price</code> a US$ 10.000; extremos são sinalizados, não apagados em massa.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -199,25 +261,41 @@
           <figcaption>A matriz reforça que preço não é explicado por uma única variável numérica; correlação aqui é descritiva, não causal.</figcaption>
         </figure>
         <figure>
+          <img src="reports/figures/scatter_relationships.png" alt="Scatter plots de avaliações totais por avaliações mensais e longitude por preço">
+          <figcaption>Os scatter plots mostram a relação esperada entre métricas de reviews e a baixa linearidade entre longitude e preço.</figcaption>
+        </figure>
+      </div>
+      <div class="figure-grid">
+        <figure>
           <img src="reports/figures/target_by_category.png" alt="Preços medianos por tipo de quarto, borough e bairro">
           <figcaption>Medianas por categoria ajudam a evitar conclusões dominadas por poucos anúncios extremamente caros.</figcaption>
         </figure>
+        <figure>
+          <img src="reports/figures/numeric_categorical.png" alt="Boxplots de disponibilidade, noites mínimas e avaliações por categorias">
+          <figcaption>Disponibilidade, noites mínimas e reviews variam por grupo, mas com grande sobreposição interna.</figcaption>
+        </figure>
       </div>
       <div class="two-column relation-copy">
+        <div>
+          <h3>Categorias × preço</h3>
+          <p>
+            A mediana de <code>Entire home/apt</code> é US$ 160, contra US$ 70 em
+            <code>Private room</code> e US$ 45 em <code>Shared room</code>.
+            Entre boroughs, Manhattan tem mediana de US$ 150, Brooklyn US$ 90,
+            Queens e Staten Island US$ 75, e Bronx US$ 65. Essas diferenças são
+            fortes o bastante para justificar encoding categórico no pipeline.
+          </p>
+        </div>
         <div>
           <h3>Numéricas × categóricas</h3>
           <p>
             Os boxplots mostram sobreposição entre grupos, mas também diferenças
             na dispersão. Isso indica que as categorias ajudam a organizar o
             problema, embora não determinem sozinhas o preço. Para a modelagem,
-            essa leitura justifica manter variáveis categóricas relevantes no
-            pipeline e evitar interpretações causais simplistas.
+            essa leitura justifica manter variáveis categóricas relevantes e
+            evitar interpretações causais simplistas.
           </p>
         </div>
-        <figure>
-          <img src="reports/figures/numeric_categorical.png" alt="Boxplots de disponibilidade, noites mínimas e avaliações por categorias">
-          <figcaption>Disponibilidade, noites mínimas e reviews variam por grupo, mas com grande sobreposição interna.</figcaption>
-        </figure>
       </div>
     </section>
 
@@ -236,7 +314,7 @@
           <article>
             <span>Outliers</span>
             <h3>Transformar, não apagar</h3>
-            <p>Preços iguais a zero são removidos como erro do alvo. Valores altos plausíveis permanecem, pois podem representar imóveis incomuns, contratos longos ou anúncios premium.</p>
+            <p>Preços iguais a zero são removidos como erro do alvo. Os 14 casos com <code>minimum_nights > 365</code> são mantidos: podem ser erro, mas também contratos longos; por isso entram com <code>log1p</code>.</p>
           </article>
           <article>
             <span>Encoding</span>
@@ -263,10 +341,16 @@
         </div>
         <p class="dark-note">
           O PCA foi usado como ferramenta exploratória, não como etapa automática
-          do pré-processador final. Como dois componentes descartariam uma parte
-          relevante da informação numérica e não revelaram agrupamentos bem
-          separados, o pipeline final preserva as variáveis transformadas para
-          que a etapa preditiva possa comparar modelos com mais flexibilidade.
+          do pré-processador final. O PC1 explica 28,7% da variância e é
+          dominado por <code>reviews_per_month</code> e
+          <code>number_of_reviews</code>, funcionando como um eixo de atividade
+          de avaliações. O PC2 explica 22,9% e é puxado por
+          <code>availability_365</code> e
+          <code>calculated_host_listings_count</code>, sugerindo um eixo de
+          disponibilidade e profissionalização do anfitrião. Como dois
+          componentes preservam apenas 51,5% da variância e não separam
+          claramente faixas de preço, o pipeline final mantém as variáveis
+          transformadas em vez de substituir tudo por PCA.
         </p>
       </div>
     </section>

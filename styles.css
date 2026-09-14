@@ -19,6 +19,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--display);
+  overflow-x: hidden;
 }
 a { color: inherit; }
 code { color: var(--coral); font-family: var(--mono); font-size: .92em; }
@@ -91,6 +92,13 @@ nav a:hover,
   gap: 70px;
   padding: 72px 0 80px;
 }
+.hero-copy,
+.hero-art,
+.two-column > *,
+.table-chart-grid > *,
+.pca-grid > * {
+  min-width: 0;
+}
 .eyebrow {
   margin: 0 0 20px;
   color: var(--coral);
@@ -130,6 +138,7 @@ p {
 
 .hero-art {
   position: relative;
+  width: 100%;
   min-height: 430px;
   overflow: hidden;
   background: var(--blue);
@@ -270,28 +279,45 @@ p {
   font-size: 15px;
 }
 
-.insight-row {
+.insight-row,
+.feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  margin-top: 48px;
   border: 1px solid var(--line);
   background: var(--line);
 }
-.insight-row article {
+.insight-row {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+.feature-grid {
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 34px;
+}
+.insight-row article,
+.feature-grid article {
   min-height: 150px;
   padding: 22px;
   background: var(--surface);
 }
 .insight-row span,
+.feature-grid span,
 .decision-grid article > span {
   color: var(--coral);
   font: 11px var(--mono);
   text-transform: uppercase;
 }
-.insight-row p {
+.insight-row p,
+.feature-grid p {
   margin: 18px 0 0;
   font-size: 14px;
+}
+
+.feature-table-wrap {
+  margin-top: 42px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
 
 .table-chart-grid {
@@ -313,11 +339,8 @@ th,
 td {
   padding: 16px 12px;
   border-bottom: 1px solid var(--line);
-  text-align: right;
-}
-th:first-child,
-td:first-child {
   text-align: left;
+  vertical-align: top;
 }
 th {
   color: var(--coral);
@@ -325,6 +348,10 @@ th {
   text-transform: uppercase;
 }
 tr:last-child td { border-bottom: 0; }
+.table-card td:not(:first-child),
+.table-card th:not(:first-child) {
+  text-align: right;
+}
 .caption {
   margin: 0;
   padding: 14px 12px 16px;
@@ -454,6 +481,7 @@ figcaption {
     min-height: 340px;
   }
   .insight-row,
+  .feature-grid,
   .decision-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -461,23 +489,43 @@ figcaption {
 
 @media (max-width: 680px) {
   .page-shell {
-    width: min(100% - 36px, 1180px);
+    width: calc(100% - 36px);
+    max-width: 354px;
   }
   .topbar {
+    width: 390px;
+    max-width: 100%;
     min-height: 68px;
     padding-inline: 18px;
-    gap: 14px;
+    gap: 10px;
     font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .brand span:not(.brand-mark) {
+    display: none;
   }
   .download-link {
-    padding: 9px 10px;
+    padding: 8px 9px;
+    white-space: nowrap;
+    font-size: 0;
+  }
+  .download-link::after {
+    content: "Notebook";
+    font-size: 10px;
   }
   .hero {
     padding: 58px 0 58px;
     gap: 40px;
   }
-  h1 { font-size: 43px; }
+  h1 {
+    font-size: 31px;
+    max-width: 100%;
+  }
   h2 { font-size: 34px; }
+  .hero-copy > p:not(.eyebrow) {
+    font-size: 17px;
+  }
   .stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -488,6 +536,7 @@ figcaption {
   }
   .stat:not(:first-child) { padding-left: 18px; }
   .insight-row,
+  .feature-grid,
   .decision-grid,
   .figure-grid {
     grid-template-columns: 1fr;
