@@ -96,7 +96,9 @@ nav a:hover,
 .hero-art,
 .two-column > *,
 .table-chart-grid > *,
-.pca-grid > * {
+.pca-grid > *,
+.audit-grid > *,
+.pipeline-steps > * {
   min-width: 0;
 }
 .eyebrow {
@@ -319,6 +321,29 @@ p {
   border: 1px solid var(--line);
   background: var(--surface);
 }
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 34px;
+}
+.audit-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.audit-card h3 {
+  margin-bottom: 18px;
+  font-size: 20px;
+}
+.audit-card table {
+  table-layout: auto;
+}
+.audit-card th,
+.audit-card td {
+  padding: 12px 10px;
+  font-size: 11px;
+}
 
 .table-chart-grid {
   display: grid;
@@ -402,6 +427,31 @@ figcaption {
   margin-bottom: 0;
   font-size: 13px;
 }
+.pipeline-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 34px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.18);
+}
+.pipeline-steps div {
+  min-height: 138px;
+  padding: 20px;
+  background: #1f2a27;
+}
+.pipeline-steps span {
+  color: var(--coral);
+  font: 11px var(--mono);
+  text-transform: uppercase;
+}
+.pipeline-steps p {
+  margin: 18px 0 0;
+  font-size: 13px;
+}
+.pipeline-steps code {
+  color: #f0a391;
+}
 
 .pca-grid {
   display: grid;
@@ -482,8 +532,12 @@ figcaption {
   }
   .insight-row,
   .feature-grid,
-  .decision-grid {
+  .decision-grid,
+  .pipeline-steps {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .audit-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -538,6 +592,7 @@ figcaption {
   .insight-row,
   .feature-grid,
   .decision-grid,
+  .pipeline-steps,
   .figure-grid {
     grid-template-columns: 1fr;
   }
